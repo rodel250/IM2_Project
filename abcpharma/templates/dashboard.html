@@ -11,8 +11,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    
     <style>
-      h1, h3 {
+      h1 {
         text-align: center;
         line-height: 1.8;
         background-color: black;
@@ -143,12 +144,9 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
 
-
-
-    
     
     <script type="text/javascript">
-           $(document).ready(function(){
+      $(document).ready(function(){
         $.fn.dataTable.ext.search.push(
         function (settings, data, dataIndex) {
             var min = $('#min').datepicker("getDate");
@@ -160,50 +158,51 @@
             if(max == null && startDate >= min) {return true;}
             if (startDate <= max && startDate >= min) { return true; }
             return false;
-        }
+          }
         );
 
        
             $("#min").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
             $("#max").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
             var table = $('#example').DataTable({
-                dom: 'Blfrtip',
-                buttons: [
-                    {extend: 'excel', text: 'Export to excel'}
-                ],
+              dom: 'Blfrtip',
+              buttons: [
+                  {extend: 'excel', text: 'Export to excel'}
+              ],
             });
 
             // Event listener to the two range filtering inputs to redraw on input
             $('#min, #max').change(function () {
                 table.draw();
             });
-        });
+      });
     </script>   
     
+
     <script type="text/javascript">
         $(document).ready(function(){
-     $.fn.dataTable.ext.search.push(
-     function (settings, data, dataIndex) {
-         var min1 = $('#min1').datepicker("getDate");
-         console.log('min', min);
-         var max1 = $('#max1').datepicker("getDate");
-         var startDate = new Date(data[0]);
-         if (min1 == null && max1 == null) { return true; }
-         if (min1 == null && startDate <= max1) { return true;}
-         if(max1 == null && startDate >= min1) {return true;}
-         if (startDate <= max1 && startDate >= min1) { return true; }
-         return false;
-     }
-     );
+         $.fn.dataTable.ext.search.push(
+           function (settings, data, dataIndex) {
+               var min1 = $('#min1').datepicker("getDate");
+               console.log('min', min);
+               var max1 = $('#max1').datepicker("getDate");
+               var startDate = new Date(data[0]);
+               if (min1 == null && max1 == null) { return true; }
+               if (min1 == null && startDate <= max1) { return true;}
+               if(max1 == null && startDate >= min1) {return true;}
+               if (startDate <= max1 && startDate >= min1) { return true; }
+               return false;
+           }
+         );
 
     
          $("#min1").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
          $("#max1").datepicker({ onSelect: function () { table.draw(); }, changeMonth: true, changeYear: true });
          var table = $('#example1').DataTable({
-            dom: 'Blfrtip',
-        buttons: [
+          dom: 'Blfrtip',
+          buttons: [
             {extend: 'excel', text: 'Export to excel'}
-        ],
+          ],
          });
          
          // Event listener to the two range filtering inputs to redraw on input
@@ -213,6 +212,7 @@
          
          
      });
+   -->
      
  </script> 
  {% endblock footerinclude %}
@@ -276,7 +276,7 @@
                   <div class="modal-dialog modal-lg" role="document">
                     <div class="modal-content">
                       <div class="modal-header" style="background-color:#4CAF50">
-                        <h2 class="modal-title" id="myLargeModalLabel">VIEW DETAILS</h2>
+                        <h5 class="modal-title" id="myLargeModalLabel"><b>VIEW DETAILS</b></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -437,8 +437,8 @@
                           </div>
                   
                           <div class="modal-footer">
+                            <button type="submit" id="btnUpdateCustomer" name="btnUpdate" class="btn btn-primary">UPDATE</button>
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
-                            <button type="submit" id="btnUpdate" name="btnUpdate" class="btn btn-primary">UPDATE</button>
                           </div>
                       </form>
                     </div>
@@ -451,7 +451,7 @@
                     <div class="modal-content">
 
                       <div class="modal-header" style="background-color:#4CAF50">
-                        <h2 class="modal-title" id="myLargeModalLabel">DELETE RECORD</h2>
+                        <h5 class="modal-title" id="myLargeModalLabel"><b>DELETE RECORD</b></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -465,8 +465,8 @@
                         <div class="modal-body">Are you sure you want to delete this record?</div>
 
                         <div class="modal-footer">
+                          <button type="submit" id="btnDeleteCustomer" name="btnDeleteCustomer" class="btn btn-primary">YES</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
-                          <button type="submit" id="btnDelete" name="btnDelete" class="btn btn-primary">YES</button>
                         </div>
                       </form>
                     </div>
@@ -524,7 +524,6 @@
                     <th>Price</th>
                     <th>No. of Items</th>
                     <th>Actions</th>
-        
                 </tr>
             </tfoot>
 
@@ -539,8 +538,8 @@
                 <td>{{medicine.price}}</td>
                 <td>{{medicine.noOfItems}}</td>
                 <td align="center">
-                    <a type="button" class="btnView" href="#" data-toggle="modal" data-target="#newModal-{{customer.id}}"><i class="fa fa-eye"></i> View</a>
-                    <button type="button" class="btnDel" data-toggle="modal" data-target="#exampleModal-{{customer.id}}"><i class="fa fa-trash"></i> Delete</button>
+                    <a type="button" class="btnView" href="#" data-toggle="modal" data-target="#viewModal-{{medicine.SKU}}"><i class="fa fa-eye"></i> View</a>
+                    <button type="button" class="btnDel" data-toggle="modal" data-target="#delModal-{{medicine.SKU}}"><i class="fa fa-trash"></i> Delete</button>
                 </td>
               </tr>
               
@@ -640,8 +639,8 @@
                 <div class="modal" id="delModal-{{medicine.SKU}}" tabindex="-1" role="dialog">
                   <div class="modal-dialog" role="document">
                     <div class="modal-content">
-                      <div class="modal-header">
-                        <h5 class="modal-title">Delete</h5>
+                      <div class="modal-header" style="background-color:#4CAF50">
+                        <h5 class="modal-title" id="myLargeModalLabel"><b>DELETE RECORD</b></h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                           <span aria-hidden="true">&times;</span>
                         </button>
@@ -651,10 +650,10 @@
                       {% csrf_token %}
                         <div class="modal-body">
                           <input type="text" name="SKU" value = {{medicine.SKU}} hidden>
-                          <p style="text-align: center;"><b>Are you sure?</b></p>
+                          Are you sure you want to delete this record?
                         </div>
 
-                        <div class="modal-footer" style="display: block; margin-left: auto; margin-right: auto;">
+                        <div class="modal-footer">
                           <button type="submit" id="btnDelete" name="btnDelete" class="btn btn-primary">YES</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
                         </div>

@@ -14,8 +14,7 @@ class CustomerIndexView(View):
 
     def post(self, request):
         if request.method == 'POST':
-            if 'btnUpdate' in request.POST:
-                # profilePic = request.FILES['customer-profile_photo']
+            if 'btnUpdateCustomer' in request.POST:
                 customerID = request.POST.get("customer-id")
                 fname = request.POST.get("customer-firstname")
                 mname = request.POST.get("customer-middlename")
@@ -42,7 +41,7 @@ class CustomerIndexView(View):
                     motherName = motherN, motherOccupation = motherO, fatherName = fatherN,  fatherOccupation = fatherO, 
                     height = height, weight = weight, religion = religion)
                 print(update_customer)
-            elif 'btnDelete' in request.POST:
+            elif 'btnDeleteCustomer' in request.POST:
                 customerID = request.POST.get("customerr-id")
                 customerr = Customer.objects.filter(person_ptr_id = customerID).delete()
                 personn = Person.objects.filter(id = customerID).delete()
@@ -85,7 +84,7 @@ class CustomerRegistrationView(View):
                 dateRegistered = dateReg)
             form.save()
 
-            return redirect('abcpharma:index_view')
+            return redirect('abcpharma:dashboard_view')
         else:
             print(form.errors)
             return HttpResponse('not valid')

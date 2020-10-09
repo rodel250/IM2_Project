@@ -53,7 +53,7 @@ class Medicine(models.Model):
     class Meta:
         db_table = "Medicine"
 
-# #option 2
+#option 2
 class Order(models.Model):
   customer = models.ForeignKey(Customer, null = False, blank = False, on_delete = models.CASCADE, related_name = "Customer")
   medicine = models.ForeignKey(Medicine, null=False, blank = False, on_delete = models.CASCADE, related_name = "Medicine")
