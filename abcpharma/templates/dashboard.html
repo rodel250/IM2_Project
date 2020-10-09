@@ -117,7 +117,7 @@
         box-shadow: none;
       }
 
-      /*img {
+      .viewImage {
         width: 350px;
         height: 350px;
         border: 2px solid green;
@@ -125,7 +125,8 @@
         margin-left: 200px;
         margin-bottom: 10px;
         box-shadow: 0 0 5px 1px;
-      }*/
+
+      }
     </style>
     <title>Dashboard</title>
     {% endblock headerinclude %}
@@ -539,8 +540,8 @@
                 <td>{{medicine.price}}</td>
                 <td>{{medicine.noOfItems}}</td>
                 <td align="center">
-                    <a type="button" class="btnView" href="#" data-toggle="modal" data-target="#newModal-{{customer.id}}"><i class="fa fa-eye"></i> View</a>
-                    <button type="button" class="btnDel" data-toggle="modal" data-target="#exampleModal-{{customer.id}}"><i class="fa fa-trash"></i> Delete</button>
+                    <a type="button" class="btnView" href="#" data-toggle="modal" data-target="#viewModal-{{medicine.SKU}}"><i class="fa fa-eye"></i> View</a>
+                    <button type="button" class="btnDel" data-toggle="modal" data-target="#delModal-{{medicine.SKU}}"><i class="fa fa-trash"></i> Delete</button>
                 </td>
               </tr>
               
@@ -623,8 +624,9 @@
                               </div>
                             </div><br>
 
-                            <div class="text-center" style="text-align: center;">Image</div>    
-                              <img src="http://localhost:8000/media/{{medicine.images}}" alt="">
+                            <div class="text-center" style="text-align: center;">Image</div>
+                            <img class="viewImage" src="http://localhost:8000/media/{{medicine.images}}" alt=""> 
+                              
                         </div>
 
                         <div class="modal-footer">
