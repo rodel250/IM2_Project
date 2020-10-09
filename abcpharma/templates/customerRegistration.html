@@ -1,0 +1,302 @@
+{% block headerinclude %}
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+    <style>
+	    body {
+	    	background-image: url('https://images.assetsdelivery.com/compings_v2/elenavdovina/elenavdovina1705/elenavdovina170500036.jpg');
+			margin: 0;
+			font-family: arial;
+			font-style: normal;
+		}
+
+		h1 {
+			text-align: center;
+			line-height: 1.8;
+		}
+
+		.header {
+	        background-color: black;
+	        color: white;
+	    }
+
+		.form-container {
+			background-color: white;
+			margin: 2% auto;
+			width: 50%;
+			height: 297%;
+			border: 3px solid black;
+			padding: 10px;
+		}
+
+		form label[for=details] {
+		  	font-weight: bold;
+		}
+
+		select {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 1px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+			
+		input[type=text], input[type=password], input[type=number] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 1px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		input[type=date] {
+			width: 100%;
+			padding: 12px 20px;
+			margin: 1px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		input[type=radio] {
+			margin-left: 50px;
+		}
+
+		input:invalid {
+		  box-shadow: 0 0 5px 1px red;
+		}
+
+		input:focus:invalid {
+		  box-shadow: none;
+		}
+
+		a {
+			text-align: center;
+			padding: 12px 20px;
+			margin: 8px 0;
+			display: inline-block;
+			border: 1px solid #ccc;
+			border-radius: 4px;
+			box-sizing: border-box;
+		}
+
+		.buttonCancel {
+			width: 49%;
+		  	color: white;
+		  	padding: 12px 20px;
+		  	margin: 14px 0px;
+		  	border: none;
+		  	border-radius: 4px;
+		  	cursor: pointer;
+		  	background-color: grey
+		}
+
+		.buttonCancel:hover {
+			text-decoration: none;
+			color: black;
+		  	padding: 12px 20px;
+		  	margin: 14px 0px;
+		  	border: 1px solid black;
+		  	border-radius: 4px;
+		  	cursor: pointer;
+		  	background-color: lightgrey;
+		}
+
+		.buttonRegister {
+			width: 49%;
+		  	color: white;
+		  	padding: 12px 20px;
+		  	margin: 14px 0px;
+		  	border: none;
+		  	border-radius: 4px;
+		  	cursor: pointer;
+		  	background-color: #4CAF50;
+		}
+
+		.buttonRegister:hover{
+			background-color: white;
+        	border: 1px solid #4CAF50;
+        	text-decoration: none;
+        	color: black;
+        	width: 49%;
+		  	border-radius: 4px;
+		  	cursor: pointer;
+		}
+
+		.ft {
+	      	text-align: center;
+	      	padding: 8px;
+	      	background-color: black;
+	      	color: white;
+	    }
+	</style>
+    <title>Customer Registration</title>
+{% endblock headerinclude %}
+
+
+{% block footerinclude %}
+	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+{% endblock footerinclude %}
+
+
+{% block content %}
+	<div class="header"><h1> ABC Pharma Automate</h1></div>
+	<div class="form-container">
+		<h1><b>CUSTOMER REGISTRATION</b></h1>
+
+		<form id="form1" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+			{% csrf_token %}
+			<center>
+				<label for="details">Profile Picture</label><br>
+				<img id="preview" width="150px" height="150px" style="box-shadow: 0 0 5px 1px black;"><br><br>
+				<input type="file" id="id-profilepicture" name="profile_photo" accept=".png, .jpg, .jpeg" onchange="load_image(this.id, this.value)" required><br><br>
+			</center>
+
+			<script type="text/javascript">
+				function load_image(id,ext)
+				{
+				   if(validateExtension(ext) == false)
+				   {
+				      alert("Upload only JPEG/JPG or PNG format ");
+				      document.getElementById("preview").innerHTML = "";
+				      document.getElementById('id-profilepicture').value = null;
+				      return;
+				   }
+				}
+
+			    function validateExtension(v)
+				{
+				      var allowedExtensions = new Array("jpg","JPG","jpeg","JPEG", "png", "PNG");
+				      for(var ct=0;ct<allowedExtensions.length;ct++)
+				      {
+				          sample = v.lastIndexOf(allowedExtensions[ct]);
+				          if(sample != -1){return true;}
+				      }
+				      return false;
+				}
+
+				var input = document.querySelector('#id-profilepicture');
+				input.addEventListener('change', preview);
+				function preview(){
+					var fileObject = this.files[0];
+					var fileReader = new FileReader();
+					fileReader.readAsDataURL(fileObject);
+					fileReader.onload = function(){
+						var result = fileReader.result;
+						var img = document.querySelector('#preview');
+						img.setAttribute('src', result);
+					}
+				}
+			</script>
+
+			<div class="row">
+				<div class="col-sm-6">
+					<label for="details">Date Registered</label>
+					<input type="date" id="id-dateRegistered" name="dateRegistered">
+				</div>
+				<div class="col-sm-6">
+					<label for="details">Customer ID</label>
+					<input disabled type="number" id="id-customerID" name="customerID" placeholder="Auto-generated">
+				</div>
+			</div><br>
+
+			<script>
+				$(document).ready(function() {
+				    var date = new Date();
+
+				    var day = date.getDate();
+				    var month = date.getMonth() + 1;
+				    var year = date.getFullYear();
+
+				    if (month < 10) month = "0" + month;
+				    if (day < 10) day = "0" + day;
+
+				    var today = year + "-" + month + "-" + day;       
+				    $("#id-dateRegistered").attr("value", today);
+				});
+			</script>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<label for="details">First Name</label>
+				</div>
+				<div class="col-sm-4">
+					<label for="details">Middle Name</label>
+				</div>
+				<div class="col-sm-4">
+					<label for="details">Last Name</label>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-4">
+					<input type="text" id="-id-firstname" name="firstname" placeholder="First Name" maxlength="50" required>
+				</div>
+				<div class="col-sm-4">
+					<input type="text" id="id-middlename" name="middlename" placeholder="Middle Name" maxlength="50">
+				</div>
+				<div class="col-sm-4">
+					<input type="text" id="id-lastname" name="lastname" placeholder="Last Name" maxlength="50" required>
+				</div>
+			</div><br>
+
+			<label for="details">Address</label>
+			<input type="text" id="id-address" name="address" placeholder="Street, Brgy, City, Prov, Zip, Country" maxlength="100" required><br><br>
+
+			<label for="details">Birthdate</label>
+			<input type="date" id="id-birthdate" name="birthdate" required><br><br>
+
+			<label for="details">Birthplace</label>
+			<input type="text" id="id-birthplace" name="birthplace" placeholder="Birthplace" maxlength="50" required><br><br>
+
+			<label for="details">Status</label><br>
+			<input type="radio" id="Single" name="status" value="Single" required>Single
+			<input type="radio" id="Married" name="status" value="Married" required>Married
+			<input type="radio" id="Widow/er" name="status" value="Widow/er" required>Widow/er
+			<input type="radio" id="Divorced" name="status" value="Divorced" required>Divorced<br><br>
+
+			<label for="details">Gender</label><br>
+			<input type="radio" id="Male" name="gender" value="Male" required>Male
+			<input type="radio" id="Female" name="gender" value="Female" required>Female<br><br>
+
+			<label for="details">Spouse's name</label>
+			<input type="text" id="id-spouseName" name="spouseName" maxlength="50"><br><br>
+
+			<label for="details">Spouse occupation</label>
+			<input type="text" id="id-spouseOccupation" name="spouseOccupation" maxlength="20"><br><br>
+
+			<label for="details">No. of Children</label>
+			<input type="number" id="id-numChildren" name="numChildren" value="0" min="0"><br><br>
+
+			<label for="details">Mother's Name</label>
+			<input type="text" id="id-motherName" name="motherName" maxlength="50" required><br><br>
+
+			<label for="details">Mother's Occupation</label>
+			<input type="text" id="id-motherOccupation" name="motherOccupation" maxlength="20" required><br><br>
+
+			<label for="details">Father's Name</label>
+			<input type="text" id="id-fatherName" name="fatherName" maxlength="50" required><br><br>
+
+			<label for="details">Father's Occupation</label>
+			<input type="text" id="id-fatherOccupation" name="fatherOccupation" maxlength="20" required><br><br>
+
+			<label for="details">Height (cm)</label>
+			<input type="number" step="any" id="id-height" name="height" min="20" required><br><br>
+
+			<label for="details">Weight (kg)</label>
+			<input type="number" step="any" id="id-weight" name="weight" min="20" required><br><br>
+
+			<label for="details">Religion</label>
+			<input type="text" id="id-religion" name="religion" maxlength="30" required><br>
+
+			<a type="button" href="{% url 'abcpharma:index_view' %}" class="buttonCancel">Cancel</a>
+			<button type="submit" class="buttonRegister">Register</button>
+		</form>
+	</div>
+{% endblock content %}
