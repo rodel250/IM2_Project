@@ -13,41 +13,15 @@ class CustomerIndexView(View):
         return render(request, 'index.html')
 
     def post(self, request):
-        if request.method == 'POST':
-            if 'btnUpdateCustomer' in request.POST:
-                customerID = request.POST.get("customer-id")
-                fname = request.POST.get("customer-firstname")
-                mname = request.POST.get("customer-middlename")
-                lname = request.POST.get("customer-lastname")
-                address = request.POST.get("customer-address")
-                bday = request.POST.get("customer-birthdate")
-                bplace = request.POST.get("customer-birthplace")
-                status = request.POST.get("customer-status")
-                gender = request.POST.get("customer-gender")
-                spouseN = request.POST.get("customer-spousename")
-                spouseO = request.POST.get("customer-spouseoccupation")
-                numChild = request.POST.get("customer-children")
-                motherN = request.POST.get("customer-mothername")
-                motherO = request.POST.get("customer-motheroccupation")
-                fatherN = request.POST.get("customer-fathername")
-                fatherO = request.POST.get("customer-fatheroccupation")
-                height = request.POST.get("customer-height")
-                weight = request.POST.get("customer-weight")
-                religion = request.POST.get("customer-religion")
+        user = request.POST.get("username")
+        customers = Customer.objects.all()
 
-                update_customer = Customer.objects.filter(person_ptr_id = customerID).update(firstname = fname, 
-                    middlename = mname, lastname = lname, address = address, birthDate = bday, birthPlace = bplace, 
-                    status = status, gender = gender, spouseName = spouseN, spouseOccupation = spouseO, children = numChild, 
-                    motherName = motherN, motherOccupation = motherO, fatherName = fatherN,  fatherOccupation = fatherO, 
-                    height = height, weight = weight, religion = religion)
-                print(update_customer)
-            elif 'btnDeleteCustomer' in request.POST:
-                customerID = request.POST.get("customerr-id")
-                customerr = Customer.objects.filter(person_ptr_id = customerID).delete()
-                personn = Person.objects.filter(id = customerID).delete()
+        for customer in customers:
+            if str(customer.id) == user:
+                return redirect('abcpharma:order_view')
 
-            return redirect('abcpharma:customer_registration_view')
-
+        return HttpResponse("Username does not exist.")
+        
 class CustomerRegistrationView(View):
     def get(self, request):
         return render(request, 'customerRegistration.html')
@@ -91,7 +65,15 @@ class CustomerRegistrationView(View):
 
 class CustomerOrderView(View):
     def get(self, request):
-        return render(request, 'orderPage.html')
+        medicines = Medicine.objects.all()
+        context = {
+            'medicines' : medicines
+        }
+        return render(request, 'orderPage.html', context)
+
+    def post(self, request):
+
+        return
 
 class DashboardIndexView(View):
     def get(self, request):

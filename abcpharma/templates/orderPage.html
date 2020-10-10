@@ -7,21 +7,87 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
     <style>
-    .Dashboard{
-      border: 2px solid black;
-      margin: 40px 300px;
-      font-family: Arial, Helvetica, sans-serif;
-      background-color: white;
-      }
-      h1{
-          background-color: black;
-          color:white;
-      }
+        body {
+            background-image: url('https://images.assetsdelivery.com/compings_v2/elenavdovina/elenavdovina1705/elenavdovina170500036.jpg');
+        }
+
+        .Dashboard{
+            border: 2px solid black;
+            margin: 40px 300px;
+            font-family: Arial, Helvetica, sans-serif;
+            background-color: white;
+        }
+
+        h1{
+            background-color: black;
+            color:white;
+        }
+
+        h5 {
+            font-size: 25px;
+            position: absolute;
+            left: 0;
+            right: 0;
+            color:white;
+        }
+
+        hr {
+          width: 750px;
+          height:5px;
+          border-width:0;
+          color:gray;
+          background-color:gray
+        }
+
+        .btn-primary {
+            padding: 5px 15px;
+            border: 1px solid #4CAF50;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .btn-primary:hover,
+        .btn-primary:focus {
+            background-color: darkgreen;
+        }
+
+        .btn-secondary {
+            padding: 5px 15px;
+            background-color: darkgrey;
+        }
+
+        .btn-secondary:hover {
+            background-color: grey;
+            border: 1px solid black;
+        }
+
+        .modal-title {
+            text-align: center;
+            font-size: 25px;
+            color: white;
+        }
+
+        input:invalid {
+            box-shadow: 0 0 5px 1px red;
+        }
+
+        input:focus:invalid {
+            box-shadow: none;
+        }
     </style>
     <title>Order Page</title>
   {% endblock headerinclude %}
-  {% block content %}
 
+
+  {% block footerinclude %}
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
+  {% endblock footerinclude %}
+
+
+  {% block content %}
+    <a type="button" href="{% url 'abcpharma:index_view' %}" class="btnLogout btn btn-primary">Logout</a>
     <div class="Dashboard">
         <h1 align="center">Medicine Catalogue</h1>
         <table width="100%" class="table-striped table-bordered table-sm" id="example1" cellspacing="0">
@@ -54,19 +120,112 @@
 
             <tbody>
                 {% for medicine in medicines %}
-                        <tr>
-                            <td>{{medicine.manufacturedDate}}</td>
-                            <td>{{medicine.expiryDate}}</td>
-                            <td>{{medicine.genericName}}</td>
-                            <td>{{medicine.commonBrand}}</td>
-                            <td>{{medicine.size}}</td>
-                            <td>{{medicine.price}}</td>
-                            <td>{{medicine.noOfItems}}</td>
-                            <td align="center">
-                                <button class="btnView" data-toggle="modal" data-target="#viewModal-{{medicine.SKU}}"><i class="fa fa-eye"></i> Buy</button>
-                            </td>
-                        </tr>
-                        
+                    <tr>
+                        <td>{{medicine.manufacturedDate}}</td>
+                        <td>{{medicine.expiryDate}}</td>
+                        <td>{{medicine.genericName}}</td>
+                        <td>{{medicine.commonBrand}}</td>
+                        <td>{{medicine.size}}</td>
+                        <td>{{medicine.price}}</td>
+                        <td>{{medicine.noOfItems}}</td>
+                        <td align="center">
+                            <button class="btnView" data-toggle="modal" data-target="#viewModal-{{medicine.SKU}}"><i class="fa fa-eye"></i> Buy</button>
+                        </td>
+                    </tr>
+                    
+                <!------- BUY MODAL -------->
+                <div class="modal fade" id="viewModal-{{medicine.SKU}}" tabindex="-1" role="dialog" aria-labelledby="newModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header" style="background-color:#4CAF50">
+                            <h5 class="modal-title" id="myLargeModalLabel"><b>MEDICINE DETAILS</b></h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+
+                        <form id="customer-medicine-form" method="POST" enctype='multipart/form-data'>
+                            <div class="modal-body">
+                                <input type="text" name="SKU" value = {{medicine.SKU}} hidden>
+                                <div class = "row">
+                                    <div class = "col-sm-12">
+                                        <label><b>SKU</b></label>
+                                        <input disabled type="number" class="form-control" name="SKU" id="SKU" placeholder="Employee ID" value ="{{medicine.SKU}}" readonly>
+                                    </div>
+                                </div><br/>
+
+                                <div class = "row">
+                                    <div class = "col-sm-4">
+                                        <label><b>Category</b></label>
+                                        <input disabled type="text" class="form-control" name="category" id="category" placeholder="category" value ="{{medicine.category}}">
+                                    </div>
+                                    <div class = "col-sm-4">
+                                        <label><b>Generic Name</b></label>
+                                        <input disabled type="text" class="form-control" name="genericName" id="genericName" placeholder="Generic Name" value ="{{medicine.genericName}}">
+                                    </div>
+                                    <div class = "col-sm-4">
+                                        <label><b>Common Brand</b></label>
+                                        <input disabled type="text" class="form-control" name="commonBrand" id="commonBrand" placeholder="Common Brand" value ="{{medicine.commonBrand}}">
+                                    </div>
+                                </div><br/>
+                                                
+                                <div class = "row">
+                                    <div class = "col-sm-6">
+                                        <label><b>Date Manufactured</b></label>
+                                        <input disabled type="date" class="form-control" name="manufacturedDate" id="manufacturedDate" placeholder="Date Manufactured" value ="{{medicine.manufacturedDate|date:"Y-m-d"}}">
+                                    </div>
+                                    <div class = "col-sm-6">
+                                        <label><b>Expiry Date</b></label>
+                                        <input disabled type="date" class="form-control" name="expiryDate" id="expiryDate" placeholder="Expiry Date" value ="{{medicine.expiryDate|date:"Y-m-d"}}">
+                                    </div>
+                                </div><br/>
+
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label"><b>How To Use:</b></label>
+                                    <textarea disabled class="form-control" name="howToUse" id="howToUse">{{medicine.howToUse}}</textarea>
+                                </div>
+                                <div class="form-group">
+                                    <label for="message-text" class="col-form-label"><b>Side Effects:</b></label>
+                                    <textarea disabled class="form-control" name="sideEffects" id="sideEffects">{{medicine.sideEffects}}</textarea>
+                                </div>
+
+                                <div class = "row">
+                                    <div class = "col-sm-4">
+                                        <label><b>Number of Items</b></label>
+                                        <input disabled type="number" class="form-control" name="noOfItems" id="noOfItems" placeholder="No. of Items" value ="{{medicine.noOfItems}}">
+                                    </div>
+                                    <div class = "col-sm-4">
+                                        <label><b>Size</b></label>
+                                        <input disabled type="number" class="form-control" name="size" id="size" placeholder="Size" value ="{{medicine.size}}">
+                                    </div>
+                                    <div class = "col-sm-4">
+                                        <label><b>Price</b></label>
+                                        <input disabled type="number" class="form-control" name="price" id="price" placeholder="Price" value ="{{medicine.price}}">
+                                    </div>
+                                </div><br>         
+
+                                <div class="text-center" style="text-align: center;"><b>Image</b></div>
+                                <img class="viewImage" src="http://localhost:8000/media/{{medicine.images}}" alt="">
+
+                                <hr><br>
+
+                                <div class="row">
+                                    <div class="col-sm-5">
+                                        <label><b>Order Date:</b></label>
+                                        <input type="date" id="id-dateOrdered" name="dateOrdered" required>
+                                    </div>
+                                    <div class="col-sm-5">
+                                        <label><b>Quantity</b></label>
+                                        <input type="number" id="id-quantity" name="quantity" min="1" max="{{medicine.noOfItems}}" required>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="submit" id="btnBuy" name="btnBuy" class="btn btn-primary">BUY</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
+                            </div>
+                        </form>
                 {% endfor %}                
             </tbody>
         </table>    
@@ -79,4 +238,3 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js" integrity="sha384-9/reFTGAW83EW2RDu2S0VKaIzap3H66lZH81PoYlFhbGU+6BZp6G7niu735Sk7lN" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js" integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8shuf57BaghqFfPlYxofvL8/KUEfYiJOMMV+rV" crossorigin="anonymous"></script>
     {% endblock content %}
-</html>

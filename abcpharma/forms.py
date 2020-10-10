@@ -13,3 +13,9 @@ class MedicineForm(forms.ModelForm):
     class Meta:
         model = Medicine
         fields = ('category','genericName')
+
+class OrderForm(forms.ModelForm):
+
+	class Meta:
+		model = Order
+		fields = ('orderedDate', 'quantity')
