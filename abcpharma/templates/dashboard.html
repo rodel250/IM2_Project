@@ -118,7 +118,7 @@
         box-shadow: none;
       }
 
-      /*img {
+      .viewImage {
         width: 350px;
         height: 350px;
         border: 2px solid green;
@@ -126,7 +126,8 @@
         margin-left: 200px;
         margin-bottom: 10px;
         box-shadow: 0 0 5px 1px;
-      }*/
+
+      }
     </style>
     <title>Dashboard</title>
     {% endblock headerinclude %}
@@ -437,7 +438,11 @@
                           </div>
                   
                           <div class="modal-footer">
+<<<<<<< HEAD
                             <button type="submit" id="btnUpdateCustomer" name="btnUpdate" class="btn btn-primary">UPDATE</button>
+=======
+                            <button type="submit" id="btnUpdateCustomer" name="btnUpdateCustomer" class="btn btn-primary">UPDATE</button>
+>>>>>>> 17e713636b2861042a3c9f104dfd24f807765709
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
                           </div>
                       </form>
@@ -622,12 +627,13 @@
                               </div>
                             </div><br>
 
-                            <div class="text-center" style="text-align: center;">Image</div>    
-                              <img src="http://localhost:8000/media/{{medicine.images}}" alt="">
+                            <div class="text-center" style="text-align: center;">Image</div>
+                            <img class="viewImage" src="http://localhost:8000/media/{{medicine.images}}" alt=""> 
+                              
                         </div>
 
                         <div class="modal-footer">
-                          <button type="submit" id="btnUpdate" name="btnUpdate"class="btn btn-primary">UPDATE</button>
+                          <button type="submit" id="btnUpdateMedicine" name="btnUpdateMedicine"class="btn btn-primary">UPDATE</button>
                           <button type="button" id="id-cancel" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
                         </div>                                    
                       </form>
@@ -654,7 +660,7 @@
                         </div>
 
                         <div class="modal-footer">
-                          <button type="submit" id="btnDelete" name="btnDelete" class="btn btn-primary">YES</button>
+                          <button type="submit" id="btnDeleteMedicine" name="btnDeleteMedicine" class="btn btn-primary">YES</button>
                           <button type="button" class="btn btn-secondary" data-dismiss="modal">NO</button>
                         </div>
                       </form>
