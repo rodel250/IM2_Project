@@ -12,6 +12,16 @@ class CustomerIndexView(View):
     def get(self, request):
         return render(request, 'index.html')
 
+    def post(self, request):
+        user = request.POST.get("username")
+        customers = Customer.objects.all()
+
+        for customer in customers:
+            if str(customer.id) == user:
+                return redirect('abcpharma:order_view')
+
+        return HttpResponse("Username does not exist.")
+        
 class CustomerRegistrationView(View):
     def get(self, request):
         return render(request, 'customerRegistration.html')
@@ -48,14 +58,22 @@ class CustomerRegistrationView(View):
                 dateRegistered = dateReg)
             form.save()
 
-            return redirect('abcpharma:index_view')
+            return redirect('abcpharma:dashboard_view')
         else:
             print(form.errors)
             return HttpResponse('not valid')
 
 class CustomerOrderView(View):
     def get(self, request):
-        return render(request, 'orderPage.html')
+        medicines = Medicine.objects.all()
+        context = {
+            'medicines' : medicines
+        }
+        return render(request, 'orderPage.html', context)
+
+    def post(self, request):
+
+        return
 
 class DashboardIndexView(View):
     def get(self, request):
