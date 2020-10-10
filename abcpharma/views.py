@@ -157,3 +157,4 @@ class MedicineRegistrationView(View):
             print(form.errors)
             return HttpResponse("failed")
             # this is a sample comment
+            # another comment
