@@ -158,3 +158,7 @@ class MedicineRegistrationView(View):
             return HttpResponse("failed")
             # this is a sample comment
             # another comment
+            # async def asd
+            # as
+            # da(parameter_list):
+            #     pass
