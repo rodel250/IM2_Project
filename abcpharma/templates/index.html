@@ -260,15 +260,16 @@
 
       <div class="col-md-4">
         <br><br><h1> Sign-in </h1>
-        <!-- <form id="form1" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
-          {% csrf_token %} -->
+        <form id="form1" action="" method="POST" autocomplete="off" enctype="multipart/form-data">
+          {% csrf_token %}
           <label for="boldText">Username</label>
-          <input type="text" id="username" name="user" placeholder="Username"><br><br>
+          <input type="text" id="username" name="username" placeholder="Username"><br><br>
           <label for="boldText">Password</label>
-          <input type="password" id="password" name="pass" placeholder="Password"><br>
-          <button type="button" class="button buttonLogin">Login</button><br>
-          <a type="submit" id="id-registration" class="button buttonRegister" href="{% url 'abcpharma:customer_registration_view' %}">Register a Customer</a>
-        <!-- </form> -->
+          <input type="password" id="password" name="password" placeholder="Password"><br>
+          <button type="submit" class="button buttonLogin">Login</button><br>
+        </form>
+
+        <a type="submit" id="id-registration" class="button buttonRegister" href="{% url 'abcpharma:customer_registration_view' %}">Register a Customer</a>
       </div>
     </div>
     <hr>
