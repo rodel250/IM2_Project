@@ -9,7 +9,7 @@
         margin: 50px 20%;
         border: 2px solid black;
         position: relative;
-        min-height: 500px;
+        height: 1010px;
         background-color: whitesmoke;
         font-family: Arial, Helvetica, sans-serif;
           
@@ -17,6 +17,50 @@
 
       .form-container form{
         margin: 30px 10px;
+      }
+
+      .buttonRegister {
+        width: 49%;
+        color: white;
+        padding: 12px 20px;
+        margin: 14px 0px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: #4CAF50;
+      }
+
+      .buttonRegister:hover{
+        background-color: white;
+        border: 1px solid #4CAF50;
+        text-decoration: none;
+        color: black;
+        width: 49%;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .buttonCancel {
+        text-align: center;
+        width: 49%;
+        color: white;
+        padding: 12px 20px;
+        margin: 14px 0px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        background-color: grey
+      }
+
+      .buttonCancel:hover {
+        text-decoration: none;
+        color: black;
+          padding: 12px 20px;
+          margin: 14px 0px;
+          border: 1px solid black;
+          border-radius: 4px;
+          cursor: pointer;
+          background-color: lightgrey;
       }
 
       h1{
@@ -131,8 +175,9 @@
               <input type="file" class="form-control" id="file" placeholder="Type here" name="images" required>
             </div>
           </div>
-     
-          <button type="submit" class="btn btn-success btn-lg btn-block">Submit</button>
+          
+          <a type="button" href="{% url 'abcpharma:index_view' %}" class="buttonCancel">Cancel</a>
+          <button type="submit" class="buttonRegister">Submit</button>
         </form>
     </div>
     {% endblock content %}
