@@ -73,17 +73,46 @@ class CustomerOrderView(View):
     def get(self, request):
         medicines = Medicine.objects.all()
         currentUser = Login.objects.values_list("username", flat=True).get(pk = 1)
+        orders = Order.objects.filter(customer_id = currentUser)
         
         customers = Customer.objects.filter(person_ptr_id = currentUser)
         context = {
             'medicines' : medicines,
-            'customers' : customers
+            'customers' : customers,
+            'orders' : orders
         }
         return render(request, 'orderPage.html', context)
 
     def post(self, request):
+        form = OrderForm(request.POST)
+        SKU = request.POST.get("SKU")
+        orders = Order.objects.all()
+        currentUser = Login.objects.values_list("username", flat=True).get(pk = 1)
 
-        return
+        if request.method == 'POST':
+            if 'btnBuy' in request.POST:
+                number = request.POST.get("noOfItems")
+                quantity = request.POST.get("quantity")
+                dif = int(number) - int(quantity)
+                if form.is_valid():
+                    for order in orders:
+                        if(int(order.medicine_id) == int(SKU) and int(order.customer_id) == int(currentUser)):
+                            quantity1 = int(order.quantity) + int(quantity)                                             
+                            update_quantity = Order.objects.filter(id = order.id).update(quantity = quantity1)
+                            update_quantity = Medicine.objects.filter(SKU = SKU).update(noOfItems = dif)
+                            return redirect('abcpharma:order_view')
+                    
+                    form = Order(medicine_id = SKU, customer_id = currentUser, quantity = quantity)
+                    update_quantity = Medicine.objects.filter(SKU = SKU).update(noOfItems = dif)
+                    form.save()                             
+                return redirect('abcpharma:order_view')
+                
+                
+                
+
+                
+                
+
 
 class DashboardIndexView(View):
     def get(self, request):
