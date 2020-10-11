@@ -18,7 +18,7 @@ class OrderForm(forms.ModelForm):
 
 	class Meta:
 		model = Order
-		fields = ('orderedDate', 'quantity')
+		fields = ('quantity',)
 
 class LoginForm(forms.ModelForm):
 

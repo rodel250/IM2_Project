@@ -100,7 +100,7 @@
     
     <div class="text-center" style="font-size: 50; color: white; background-color: black; padding-bottom: 10px;">
         {% for customer in customers %}
-        <b>WELCOME {{customer.firstname}}</b>
+        <b>Welcome {{customer.firstname}} !</b>
         <br>
         {% endfor %}
         <a type="button" href="{% url 'abcpharma:index_view' %}" class="btnLogout btn btn-primary">Logout</a>
@@ -168,57 +168,57 @@
                                 <div class = "row">
                                     <div class = "col-sm-12">
                                         <label><b>SKU</b></label>
-                                        <input disabled type="number" class="form-control" name="SKU" id="SKU" placeholder="Employee ID" value ="{{medicine.SKU}}" readonly>
+                                        <input type="number" class="form-control" name="SKU" id="SKU" placeholder="Employee ID" value ="{{medicine.SKU}}" readonly>
                                     </div>
                                 </div><br/>
 
                                 <div class = "row">
                                     <div class = "col-sm-4">
                                         <label><b>Category</b></label>
-                                        <input disabled type="text" class="form-control" name="category" id="category" placeholder="category" value ="{{medicine.category}}">
+                                        <input type="text" class="form-control" name="category" id="category" placeholder="category" value ="{{medicine.category}}" readonly>
                                     </div>
                                     <div class = "col-sm-4">
                                         <label><b>Generic Name</b></label>
-                                        <input disabled type="text" class="form-control" name="genericName" id="genericName" placeholder="Generic Name" value ="{{medicine.genericName}}">
+                                        <input type="text" class="form-control" name="genericName" id="genericName" placeholder="Generic Name" value ="{{medicine.genericName}}" readonly>
                                     </div>
                                     <div class = "col-sm-4">
                                         <label><b>Common Brand</b></label>
-                                        <input disabled type="text" class="form-control" name="commonBrand" id="commonBrand" placeholder="Common Brand" value ="{{medicine.commonBrand}}">
+                                        <input type="text" class="form-control" name="commonBrand" id="commonBrand" placeholder="Common Brand" value ="{{medicine.commonBrand}}" readonly>
                                     </div>
                                 </div><br/>
                                                 
                                 <div class = "row">
                                     <div class = "col-sm-6">
                                         <label><b>Date Manufactured</b></label>
-                                        <input disabled type="date" class="form-control" name="manufacturedDate" id="manufacturedDate" placeholder="Date Manufactured" value ="{{medicine.manufacturedDate|date:"Y-m-d"}}">
+                                        <input type="date" class="form-control" name="manufacturedDate" id="manufacturedDate" placeholder="Date Manufactured" value ="{{medicine.manufacturedDate|date:"Y-m-d"}}" readonly>
                                     </div>
                                     <div class = "col-sm-6">
                                         <label><b>Expiry Date</b></label>
-                                        <input disabled type="date" class="form-control" name="expiryDate" id="expiryDate" placeholder="Expiry Date" value ="{{medicine.expiryDate|date:"Y-m-d"}}">
+                                        <input type="date" class="form-control" name="expiryDate" id="expiryDate" placeholder="Expiry Date" value ="{{medicine.expiryDate|date:"Y-m-d"}}" readonly>
                                     </div>
                                 </div><br/>
 
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label"><b>How To Use:</b></label>
-                                    <textarea disabled class="form-control" name="howToUse" id="howToUse">{{medicine.howToUse}}</textarea>
+                                    <textarea class="form-control" name="howToUse" id="howToUse" readonly>{{medicine.howToUse}}</textarea>
                                 </div>
                                 <div class="form-group">
                                     <label for="message-text" class="col-form-label"><b>Side Effects:</b></label>
-                                    <textarea disabled class="form-control" name="sideEffects" id="sideEffects">{{medicine.sideEffects}}</textarea>
+                                    <textarea class="form-control" name="sideEffects" id="sideEffects" readonly>{{medicine.sideEffects}}</textarea>
                                 </div>
 
                                 <div class = "row">
                                     <div class = "col-sm-4">
                                         <label><b>Number of Items</b></label>
-                                        <input disabled type="number" class="form-control" name="noOfItems" id="noOfItems" placeholder="No. of Items" value ="{{medicine.noOfItems}}">
+                                        <input type="number" class="form-control" name="noOfItems" id="noOfItems" placeholder="No. of Items" value ="{{medicine.noOfItems}}" readonly>
                                     </div>
                                     <div class = "col-sm-4">
                                         <label><b>Size</b></label>
-                                        <input disabled type="number" class="form-control" name="size" id="size" placeholder="Size" value ="{{medicine.size}}">
+                                        <input type="number" class="form-control" name="size" id="size" placeholder="Size" value ="{{medicine.size}}" readonly>
                                     </div>
                                     <div class = "col-sm-4">
                                         <label><b>Price</b></label>
-                                        <input disabled type="number" class="form-control" name="price" id="price" placeholder="Price" value ="{{medicine.price}}">
+                                        <input type="number" class="form-control" name="price" id="price" placeholder="Price" value ="{{medicine.price}}" readonly>
                                     </div>
                                 </div><br>         
 
@@ -226,12 +226,8 @@
                                 <img class="viewImage" src="http://localhost:8000/media/{{medicine.images}}" alt="">
 
                                 <hr><br>
-
+                                {% csrf_token %}
                                 <div class="row">
-                                    <div class="col-sm-5">
-                                        <label><b>Order Date:</b></label>
-                                        <input type="date" id="id-dateOrdered" name="dateOrdered" required>
-                                    </div>
                                     <div class="col-sm-5">
                                         <label><b>Quantity</b></label>
                                         <input type="number" id="id-quantity" name="quantity" min="1" max="{{medicine.noOfItems}}" required>
@@ -244,6 +240,40 @@
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
                             </div>
                         </form>
+                {% endfor %}                
+            </tbody>
+        </table>    
+    </div>
+
+    
+    <div class="Dashboard">
+        <h1 align="center">Purchase Log</h1>
+        <table width="100%" class="table-striped table-bordered table-sm" id="example1" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>Date Ordered</th>
+                    <th>Medicine SKU</th>
+                    <th>Quantity</th>
+
+                </tr>
+            </thead>
+            <tfoot>
+                <tr>
+                    <th>Date Ordered</th>
+                    <th>Medicine SKU</th>
+                    <th>Quantity</th>
+        
+                </tr>
+            </tfoot>
+
+            <tbody>
+                {% for order in orders %}
+                    <tr>
+                        <td>{{order.orderedDate}}</td>
+                        <td>{{order.medicine_id}}</td>
+                        <td>{{order.quantity}}</td>
+                    </tr>
+                    
                 {% endfor %}                
             </tbody>
         </table>    
