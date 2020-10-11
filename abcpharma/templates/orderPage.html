@@ -111,6 +111,7 @@
         <table width="100%" class="table-striped table-bordered table-sm" id="example1" cellspacing="0">
             <thead>
                 <tr>
+                    <th>SKU</th>
                     <th>Date Manufactured</th>
                     <th>Expiry Date</th>
                     <th>Generic Name</th>
@@ -124,6 +125,7 @@
             </thead>
             <tfoot>
                 <tr>
+                    <th>SKU</th>
                     <th>Date Manufactured</th>
                     <th>Expiry Date</th>
                     <th>Generic Name</th>
@@ -139,6 +141,7 @@
             <tbody>
                 {% for medicine in medicines %}
                     <tr>
+                        <td>{{medicine.SKU}}</td>
                         <td>{{medicine.manufacturedDate}}</td>
                         <td>{{medicine.expiryDate}}</td>
                         <td>{{medicine.genericName}}</td>
