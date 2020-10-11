@@ -13,6 +13,11 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     
     <style>
+      .btnBack {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
       h1 {
         text-align: center;
         line-height: 1.8;
@@ -438,11 +443,7 @@
                           </div>
                   
                           <div class="modal-footer">
-<<<<<<< HEAD
-                            <button type="submit" id="btnUpdateCustomer" name="btnUpdate" class="btn btn-primary">UPDATE</button>
-=======
                             <button type="submit" id="btnUpdateCustomer" name="btnUpdateCustomer" class="btn btn-primary">UPDATE</button>
->>>>>>> 17e713636b2861042a3c9f104dfd24f807765709
                             <button type="button" class="btn btn-secondary" data-dismiss="modal">CANCEL</button>
                           </div>
                       </form>
@@ -671,4 +672,5 @@
             </tbody>
         </table>    
     </div>
+    <div class="btnBack"><a type="button" href="{% url 'abcpharma:index_view' %}" class="btn btn-danger">Go Back</a></div>
   {% endblock content %}
