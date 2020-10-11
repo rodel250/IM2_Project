@@ -97,7 +97,15 @@
 
 
   {% block content %}
-    <a type="button" href="{% url 'abcpharma:index_view' %}" class="btnLogout btn btn-primary">Logout</a>
+    
+    <div class="text-center" style="font-size: 50; color: white; background-color: black; padding-bottom: 10px;">
+        {% for customer in customers %}
+        <b>WELCOME {{customer.firstname}}</b>
+        <br>
+        {% endfor %}
+        <a type="button" href="{% url 'abcpharma:index_view' %}" class="btnLogout btn btn-primary">Logout</a>
+    </div>
+    
     <div class="Dashboard">
         <h1 align="center">Medicine Catalogue</h1>
         <table width="100%" class="table-striped table-bordered table-sm" id="example1" cellspacing="0">

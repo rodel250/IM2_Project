@@ -72,8 +72,14 @@ class CustomerRegistrationView(View):
 class CustomerOrderView(View):
     def get(self, request):
         medicines = Medicine.objects.all()
+        currentUser = Login.objects.values_list("username", flat=True).get(pk = 1)
+        x = currentUser
+        print(x)
+        
+        customers = Customer.objects.filter(person_ptr_id = x)
         context = {
-            'medicines' : medicines
+            'medicines' : medicines,
+            'customers' : customers
         }
         return render(request, 'orderPage.html', context)
 
