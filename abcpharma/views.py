@@ -73,10 +73,8 @@ class CustomerOrderView(View):
     def get(self, request):
         medicines = Medicine.objects.all()
         currentUser = Login.objects.values_list("username", flat=True).get(pk = 1)
-        x = currentUser
-        print(x)
         
-        customers = Customer.objects.filter(person_ptr_id = x)
+        customers = Customer.objects.filter(person_ptr_id = currentUser)
         context = {
             'medicines' : medicines,
             'customers' : customers
