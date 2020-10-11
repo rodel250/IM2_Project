@@ -15,9 +15,15 @@ class CustomerIndexView(View):
     def post(self, request):
         user = request.POST.get("username")
         customers = Customer.objects.all()
+        form = LoginForm(request.POST)
 
         for customer in customers:
-            if str(customer.id) == user:
+            if str(customer.id) == user:                
+                if form.is_valid():
+                    username1 = request.POST.get("username")
+                    form = Login.objects.get(id=1)
+                    form.username = username1
+                    form.save()   
                 return redirect('abcpharma:order_view')
 
         return HttpResponse("Username does not exist.")
