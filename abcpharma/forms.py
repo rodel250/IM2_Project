@@ -19,3 +19,9 @@ class OrderForm(forms.ModelForm):
 	class Meta:
 		model = Order
 		fields = ('orderedDate', 'quantity')
+
+class LoginForm(forms.ModelForm):
+
+	class Meta:
+		model = Login
+		fields = ('username',)

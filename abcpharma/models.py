@@ -62,3 +62,9 @@ class Order(models.Model):
 
   class Meta:
       db_table = "Order"
+
+class Login(models.Model):
+    username = models.IntegerField()
+    
+    class Meta:
+        db_table = "currentUser"
