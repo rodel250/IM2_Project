@@ -18,7 +18,7 @@ class CustomerIndexView(View):
         form = LoginForm(request.POST)
 
         for customer in customers:
-            if str(customer.id) == user:                
+            if str(customer.id) == user and customer.isDeleted != 1:                
                 if form.is_valid():
                     username1 = request.POST.get("username")
                     form = Login.objects.get(id=1)
@@ -71,7 +71,7 @@ class CustomerRegistrationView(View):
 
 class CustomerOrderView(View):
     def get(self, request):
-        medicines = Medicine.objects.all()
+        medicines = Medicine.objects.filter(isDeleted = 0)
         currentUser = Login.objects.values_list("username", flat=True).get(pk = 1)
         orders = Order.objects.filter(customer_id = currentUser)
         
@@ -148,7 +148,7 @@ class DashboardIndexView(View):
                 print('delete button clicked')
                 SKU1 = request.POST.get("SKU")
                 print(SKU1)
-                med = Medicine.objects.filter(SKU = SKU1).delete()
+                med = Medicine.objects.filter(SKU = SKU1).update(isDeleted = 1)
                 print('Deleted')
             elif 'btnUpdateCustomer' in request.POST:
                 customerID = request.POST.get("customer-id")
@@ -179,8 +179,8 @@ class DashboardIndexView(View):
                 print(update_customer)
             elif 'btnDeleteCustomer' in request.POST:
                 customerID = request.POST.get("customerr-id")
-                customerr = Customer.objects.filter(person_ptr_id = customerID).delete()
-                personn = Person.objects.filter(id = customerID).delete()
+                customerr = Customer.objects.filter(person_ptr_id = customerID).update(isDeleted = 1)
+                #personn = Person.objects.filter(id = customerID).delete()
                 
         return redirect('abcpharma:dashboard_view')
 

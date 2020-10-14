@@ -22,6 +22,7 @@ class Person(models.Model):
         height = models.FloatField()
         weight = models.FloatField()
         religion = models.CharField(max_length = 30)
+        
 
         class Meta:
             db_table = "Person"
@@ -29,6 +30,7 @@ class Person(models.Model):
 class Customer(Person):
     photo = models.FileField()
     dateRegistered = models.DateField(default = datetime.now())
+    isDeleted = models.IntegerField(default=0)
     
     #option 1
     #medicines = models.ManyToManyField(Medicine)
@@ -49,6 +51,7 @@ class Medicine(models.Model):
     price = models.DecimalField(max_digits = 10, decimal_places=2)
     noOfItems = models.IntegerField()
     images = models.ImageField(upload_to='upload/')
+    isDeleted = models.IntegerField(default=0)
 
     class Meta:
         db_table = "Medicine"
